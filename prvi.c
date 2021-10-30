@@ -2,50 +2,52 @@
 #include <stdlib.h>
 #include <string.h>
 
-//#define MAX_S 128
-//#define MAX_L 1024
+#define MAX 128
+#define MAXR 1024
+
 
 typedef struct student
 {
-	char ime[50];
-	char prezime[50];
+	char ime[MAX];
+	char prezime[MAX];
 	double bodovi;	
 }student;
 
-int brred();
+int prebroji();
+
+
+
 student* aip(int ,student*);
 
 int main() 
 {
 	
 	student *s;
-	int brstud, i;
-	FILE *f;
-	f=fopen("std.txt","r");
-	brstud=brred();
+	int brstud=0, i;
+	brstud=prebroji();
 	
 	
 	printf("Broj studenata je %d \n",brstud);
+	
 	s=aip(brstud,s);
 	for(i=0;i<brstud;i++)
 	{
-		printf("%s\t %s\t %lf\n",s[i].ime,s[i].prezime,s[i].bodovi);
+		printf("%s\t %s\t %lf\t %lf\n",s[i].ime,s[i].prezime,s[i].bodovi,s[i].bodovi/30*100);
 	}
+	
 	
 	
 	return 0;
 }
 
-int brred()
+int prebroji()
 {
 	int br=0;
+
 	
 	FILE *f=NULL;
 	
-	f=fopen("std.txt","r");
-	
-//	if(!f)
-//	printf("greska");
+	f=fopen("datoteka1.txt","r");
 	
 	while(!feof(f))
 	{
@@ -61,7 +63,8 @@ student* aip(int br, student *s)
 {
 	int i;
 	FILE *f;
-	f=fopen("std.txt","r");
+	f=fopen("datoteka1.txt","r");
+	
 	
 	s=(student*)malloc(br*sizeof(student));
 	
