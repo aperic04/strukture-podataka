@@ -14,22 +14,67 @@ typedef struct student{
 int unosNaPocetak(student * HEAD, student *ubaci);
 int ispis(student * head);
 int unosNaKraj(student * HEAD, student * ubaci);
-student * pronadjiPoPrezimenu(student *HEAD, cahr *prezime);
+student * pronadjiPoPrezimenu(student *HEAD, char *prezime);
 int brisiElement(student *HEAD, student * element);
-student * pronadjiZadnjiElement(stuent *HEAD);
+student * pronadjiZadnjiElement(student *HEAD);
 student * pronadjiPrethodniElement(student *HEAD, student *elemnt);
 student *unosPodataka(void);
 
 
 int main()
 {
+	int br;	s=(student*)malloc(sizeof(student));
+
+	char prezime[50];
 	student *HEAD;
+	student *s;
 	HEAD=(student*)malloc(sizeof(student));
 	if(!HEAD)
 	return -1;
 	
 	HEAD->next=NULL;
 	
+	printf("Upisite 1 za unos elementa na pocetak liste \n");
+	printf("Upisite 2 za ispis liste \n");
+	printf("Upisite 3 za unos elementa na kraj liste \n");
+	printf("Upisite 4 za pretragu elementa po prezimenu \n");
+	printf("Upisite 5 za brisanje elementa iz liste \n");
+
+	scanf("%d",&br);
+	
+	switch(br)
+	{
+		case (1):
+			unosNaPocetak(HEAD,unosPodataka());
+				break;
+			
+			
+			case (2):
+			ispis(HEAD);
+				break;
+			
+			
+			case (3):
+				unosNaKraj(HEAD,unosPodataka());
+				break;
+			
+			
+			case (4):
+				
+				printf("Unesi prezime po kojem zelis pretraziti\n");
+				scanf("%s",prezime);
+				s=pronadjiPoPrezimenu(HEAD,prezime);
+				printf("%s %s %s",s->ime,s->prezime,s->godinaRodjenja);
+				break;
+			
+			case (5):
+			
+				printf("Unesite prezime studenta kojeg zelite izbrisati:\n");
+				scanf("%s",prezime);
+				brisiElement(HEAD,pronadjiPoPrezimenu(HEAD,prezime));
+				break;
+			
+	}
 	
 	return 0;
 }
@@ -75,8 +120,10 @@ student * pronadjiZadnjiElement(student *HEAD)
 
 student *pronadiPrethodniElement(student *HEAD, student *element)
 {
+	
+	//element=(student*)malloc(sizeof(student));
 	student *s=HEAD;
-	while(s!=NULL && s->next!=elemnt)
+	while(s!=NULL && s->next!=element)
 	s=s->next;
 	
 	return s;
@@ -94,9 +141,9 @@ student * pronadjiPoPrezimenu(student *HEAD, char *prezime)
 	return s;
 }
 
-int brisiEement(strudent *HEAD, student *element)
+int brisiEement(student *HEAD, student *element)
 {
-	srudent *s=HEAD;
+	student *s=HEAD;
 	
 	while(s!=NULL && s->next !=element)
 	{
