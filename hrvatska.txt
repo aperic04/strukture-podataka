@@ -1,0 +1,3 @@
+Imotski 10000
+Split 500000
+Zagreb 1000000

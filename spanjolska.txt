@@ -1,0 +1,3 @@
+Madrid 10000000
+Barcelona 8000000
+Sevilla 4000000

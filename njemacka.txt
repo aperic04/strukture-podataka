@@ -1,0 +1,3 @@
+Berlin 3000000
+Frankfurt 2500000
+Koln 1000000
