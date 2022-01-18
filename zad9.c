@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include<string.h>
 #include<time.h>
+#define CON 50
 
 struct _cvor;
 typedef struct _cvor* pozicija;
@@ -14,6 +15,7 @@ typedef struct _cvor
 	pozicija D;
 }cvor;
 
+
 struct _lista;
 typedef struct _lista* ListaPozicija;
 typedef struct _lista
@@ -21,6 +23,8 @@ typedef struct _lista
 	int el;
 	ListaPozicija next;
 }lista;
+
+
 
 int inorder(pozicija S, ListaPozicija head);
 pozicija StvoriPrazno(pozicija S);
@@ -32,43 +36,18 @@ int UmetniNaKraj(ListaPozicija head, int broj);
 ListaPozicija PronadiZadnji(ListaPozicija head);
 int umetni(ListaPozicija head, int broj);
 int ispis_liste_u_file(ListaPozicija p1, ListaPozicija p2, ListaPozicija p3, char* dat);
+void ProgramIPozivFunkcija(void);
+
+
 
 int main()
 {
-	pozicija root = NULL;
-	ListaPozicija head1 = NULL, head2 = NULL, head3 = NULL;
-	char ime[50] = "vjezba9_stablo.txt";
-
-	root = StvoriPrazno(root);
-	head1 = (ListaPozicija)malloc(sizeof(lista));
-	head1->next = NULL;
-	head2 = (ListaPozicija)malloc(sizeof(lista));
-	head2->next = NULL;
-	head3 = (ListaPozicija)malloc(sizeof(lista));
-	head3->next = NULL;
-
-	root = insert(root, 2);
-	root = insert(root, 5);
-	root = insert(root, 7);
-	root = insert(root, 8);
-	root = insert(root, 11);
-	root = insert(root, 1);
-	root = insert(root, 4);
-	root = insert(root, 2);
-	root = insert(root, 3);
-	root = insert(root, 7);
-	inorder(root, head1);
-
-	root = replace(root);
-	inorder(root, head2);
-
-	root = StvoriPrazno(root);
-	root = random(root);
-	inorder(root, head3);
-	ispis_liste_u_file(head1->next, head2->next, head3->next, ime);
-
+	ProgramIPozivFunkcija();
 	return 0;
 }
+
+
+
 
 pozicija StvoriPrazno(pozicija S)
 {
@@ -81,6 +60,7 @@ pozicija StvoriPrazno(pozicija S)
 	return NULL;
 }
 
+
 int inorder(pozicija S, ListaPozicija head)
 {
 	if (S == NULL)
@@ -92,6 +72,7 @@ int inorder(pozicija S, ListaPozicija head)
 
 	return 0;
 }
+
 
 pozicija insert(pozicija S, int el)
 {
@@ -114,6 +95,7 @@ pozicija insert(pozicija S, int el)
 	return S;
 }
 
+
 int suma(pozicija S)
 {
 	int suma1 = 0;
@@ -126,6 +108,8 @@ int suma(pozicija S)
 
 	return suma1;
 }
+
+
 pozicija replace(pozicija S)
 {
 	if (S != NULL)
@@ -136,6 +120,7 @@ pozicija replace(pozicija S)
 	}
 	return S;
 }
+
 
 pozicija random(pozicija S)
 {
@@ -151,6 +136,7 @@ pozicija random(pozicija S)
 	return S;
 }
 
+
 int UmetniNaKraj(ListaPozicija head, int broj)
 {
 	ListaPozicija zadnji = NULL;
@@ -159,6 +145,7 @@ int UmetniNaKraj(ListaPozicija head, int broj)
 	return 0;
 }
 
+
 ListaPozicija PronadiZadnji(ListaPozicija head)
 {
 	while (head->next != NULL)
@@ -166,6 +153,7 @@ ListaPozicija PronadiZadnji(ListaPozicija head)
 
 	return head;
 }
+
 
 int umetni(ListaPozicija head, int broj)
 {
@@ -181,10 +169,11 @@ int umetni(ListaPozicija head, int broj)
 	return 0;
 }
 
+
 int ispis_liste_u_file(ListaPozicija p1, ListaPozicija p2, ListaPozicija p3, char* dat)
 {
 	FILE* f = NULL;
-	f = fopen(dat, "w");
+	f = fopen(dat, "w+");
 	if (f == NULL)
 	{
 		printf("Neuspjesno otvaranje datoteke!");
@@ -213,4 +202,41 @@ int ispis_liste_u_file(ListaPozicija p1, ListaPozicija p2, ListaPozicija p3, cha
 
 	fclose(f);
 	return 0;
+}
+
+
+
+void ProgramIPozivFunkcija(void)
+{
+	pozicija root = NULL;
+	ListaPozicija head1 = NULL, head2 = NULL, head3 = NULL;
+	char ime[CON] = "vjezba9.txt";
+
+	root = StvoriPrazno(root);
+	head1 = (ListaPozicija)malloc(sizeof(lista));
+	head1->next = NULL;
+	head2 = (ListaPozicija)malloc(sizeof(lista));
+	head2->next = NULL;
+	head3 = (ListaPozicija)malloc(sizeof(lista));
+	head3->next = NULL;
+
+	root = insert(root, 2);
+	root = insert(root, 5);
+	root = insert(root, 7);
+	root = insert(root, 8);
+	root = insert(root, 11);
+	root = insert(root, 1);
+	root = insert(root, 4);
+	root = insert(root, 2);
+	root = insert(root, 3);
+	root = insert(root, 7);
+	inorder(root, head1);
+
+	root = replace(root);
+	inorder(root, head2);
+
+	root = StvoriPrazno(root);
+	root = random(root);
+	inorder(root, head3);
+	ispis_liste_u_file(head1->next, head2->next, head3->next, ime);
 }
